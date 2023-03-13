@@ -112,8 +112,9 @@
         method: 'post',
         data: {
             search: search,
-            checkedValues:checkedValues,
+            brand:checkedValues,
             page:page,
+            sort:selectOption
         },
         success: function(response) {
             let searchedArea = document.getElementById('searched');
