@@ -3,7 +3,11 @@ const mongoose =  require("mongoose");
 mongoose.set('strictQuery',false)
 const tippy = require('tippy.js');
 
-mongoose.connect(process.env.MONGODB_IP)
+mongoose.connect('mongodb://127.0.0.1:27017/Lap_store').then(() => {
+  console.log('database connected');
+}).catch((err) => {
+  console.log(err);
+})
 const path =require('path');
 
 const express = require('express');
