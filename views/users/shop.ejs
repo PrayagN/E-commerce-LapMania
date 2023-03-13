@@ -118,7 +118,7 @@
     <option value="Price">Price</option>
   <option value="Low to High">Low to High</option>
   <option value="High to Low">High to Low</option>
-  <!-- <option value="Best Rating">Best Rating</option> -->
+
 </select>
 
                 </div>
@@ -303,7 +303,105 @@
         </div>
     </div>
     <!-- Shop End -->
+<script>
+    function searchProduct(){
+    
+    const search = document.getElementById('search_input').value;
+    const checkboxes = document.querySelectorAll('input[name="brand"]');
+  
+  let checkedValues = [];
 
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      checkedValues.push(checkbox.value);
+    }
+  });
+  const selectOption = document.getElementById('sort-select').value;
+  const page = document.getElementById("page").innerHTML
+  console.log(checkedValues);
+  console.log(search);
+
+    $.ajax({
+        url: '/search',
+        method: 'post',
+        data: {
+            search: search,
+            brand:checkedValues,
+            page:Number(page),
+            sort:selectOption
+        },
+        success: function(response) {
+            let searchedArea = document.getElementById('searched');
+            let html = "";
+            if(response.product) {
+                response.product.forEach((element) => {
+                    html += `<div class="col-lg-4 col-md-6 col-sm-6 pb-1" >
+                            <div class="product-item bg-light mb-4">
+                            <div class="product-img position-relative overflow-hidden">
+                                <% if ('${element.stocks}'  == 0) { %>
+                                    <span class="badge badge-danger" style="position: absolute;">Out of Stock</span>
+                                  <% } %>
+                                <img class="img-fluid w-100" src="/productImages/${element.image[0]}" style="height: 16rem;" alt="">
+                                <div class="product-action d-flex justify-content-end" style="padding-top: 210px;">
+                                    <% if(typeof userData !== 'undefined'){%>
+                                        <%if ('${element.stocks}' == 0) {%>
+                                                 <%}else{%>
+                                        
+                                                 <%}%>
+                                    <%if( wishlistData && wishlistData.products.includes('${element._id}')){%>
+                                        <a class="btn  " onclick="wishlist('${element._id}')" ><i id="wish-${element._id}" class="bx bxs-heart bx-tada text-danger"></i></a>
+                                        <%}else{%>
+                                        <a class="btn " onclick="wishlist('${element._id}')" ><i id="wish-${element._id}" class="fas fa-heart "></i></a>
+                                     
+                                             <%}%>   
+                                             
+                                    <%}else{%>
+
+                                    
+                                        <a class="btn " href="/login"><i class="fas fa-heart"></i></a>
+                                        
+                                
+                                    
+                                    <%}%>
+                                        
+                                       
+                    
+                                </div>
+                                
+                            </div>
+                            <div class="text-center ">
+                                
+                                <div style=" font-size: medium; color: black; word-wrap: break-word; display: -webkit-box; -webkit-box-orient: vertical; text-overflow: ellipsis; -webkit-line-clamp: 2; overflow: hidden;">
+                                    <a class="text-dark" style="text-decoration: none;" href="/productdetail?id=${element._id}">${element.name}</a>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                   <h5 style="font-size: 16px;">&#x20B9;${element.offerPrice}</h5><h6 class="text-muted ml-2"><del style="font-size: 16px;">&#x20B9;${element.price}</del></h6>
+                                        
+                                </div>
+                                
+                                
+                                <div class="d-flex align-items-center justify-content-center mb-1">
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                searchedArea.innerHTML = html;
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+</script>
 
     <!-- Footer Start -->
 <%-include('../layouts/websitefooter.ejs')%>

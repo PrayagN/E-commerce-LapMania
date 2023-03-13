@@ -127,6 +127,8 @@ const insertUser = async (req, res) => {
     let mobileExist = await User.find({ mobile: mobile });
     if (!checkExist.length && !mobileExist.length) {
       req.session.userData = req.body;
+      console.log(req.session.userData, "2");
+      console.log(req.body.usr);
       if (req.session.userData) {
         if (req.session.userData.mob) {
           const mobile = req.session.userData.mob;
@@ -2182,69 +2184,39 @@ const couponApply = async (req, res) => {
   }
 };
 
-
-const searchProduct = async (req, res, next) => {
+const searchProduct = async (req, res) => {
   try {
-    console.log(req.body.sort);
-    console.log(req.body.search);
-    console.log(req.body.brand);
-    let page=1
-    let limit=5
-    if (
-      req.body.sort == "Price" &&
-      req.body.search == "" &&
-      req.body.page == 1 &&
-      req.body.brand == null
-    ) 
+    let search = "";
+    let page = 1;
+    const limit = 5;
+    let checkedValues = req.body.brand;
+    let sortOption = req.body.sort;
   
-    {
-         productData = await Product.find({ list: 0 })
-        .limit(limit * 1)
-        .skip((page - 1) * limit)
-        .exec();
-      res.json({ product: productData });
-    } else {
-      let sortOption = "";
-      let search = "";
-      let categoryIds = req.body.brand || null;
-
-      if (req.body.page !== undefined) {
-        page = req.body.page;
-      }
-      if (req.body.sort !== undefined) {
-        sortOption = req.body.sort;
-      }
-      if (req.body.search !== undefined) {
-        search = req.body.search;
-      }
-      if (req.body.brand !== undefined) {
-        categoryIds = req.body.brand;
-      }
-
-      console.log(categoryIds,"tgjhjnghgnfjjhngghjhknhgjnnnnnnnrytfghbjnkkmopicdfgvbhnmlkjn,mjdfcgvbhnh mlk,nmn bfvgbhn");
-
-      const query = {
-        $or: [
-          { name: { $regex: "." + search + ".", $options: "i" } },
-          { brand: { $regex: "." + search + ".", $options: "i" } },
-        ]
-      };
-      if (categoryIds && categoryIds.length > 0) {
-        query.brand = { $in: categoryIds };
-      }
-
-      console.log(query);
-         productData = await Product.find(query)
-        .limit(limit * 1)
-        .skip((page - 1) * limit)
-        .exec();
-
-        if (productData.length==0) {
-          productData = await Product.find({ list: 0 })
-          .limit(limit * 1)
-          .skip((page - 1) * limit)
-          .exec();
-        }
+    if (req.body.page) {
+      page = req.body.page;
+    }
+  
+    let productQuery = { list: 0 };
+  
+    if (req.body.search) {
+      search = req.body.search;
+      productQuery.$or = [
+        { name: { $regex: ".*" + search + ".*", $options: "i" } },
+        { brand: { $regex: ".*" + search + ".*", $options: "i" } },
+      ];
+    }
+  
+    if (checkedValues && checkedValues.length > 0) {
+      productQuery.brand = { $in: checkedValues };
+    }
+  
+    let productData = await Product.find(productQuery)
+      .populate("category")
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .exec();
+  
+    if (sortOption) {
       switch (sortOption) {
         case "Low to High":
           productData.sort((a, b) => a.offerPrice - b.offerPrice);
@@ -2253,17 +2225,15 @@ const searchProduct = async (req, res, next) => {
           productData.sort((a, b) => b.offerPrice - a.offerPrice);
           break;
         default:
-        // Sort by default (no sorting)
+          // do nothing
       }
-
-
-      res.json({ product: productData });
     }
+  
+    res.json({ product: productData });
   } catch (error) {
     console.log(error.message);
   }
-};
-
+}  
 
 const sortPrice = async (req, res) => {
   try {
