@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-
+const env = require('dotenv').config();
 const session =require('express-session')
 
 const config = require('../config/config')
@@ -126,7 +126,7 @@ const logout = async(req,res,next)=>{
 
 const insertUser = async (req, res) => {
   try {
-
+    console.log(authSid,"sdfssd");
       const mobile =req.body.mob
   
 
@@ -158,7 +158,10 @@ const insertUser = async (req, res) => {
           if(req.session.userData.mob){
 
         const mobile = req.session.userData.mob
+        console.log(mobile,"mobile");
+        console.log(authSid,"1111");
         client.verify.v2.services(authSid)
+        
           .verifications
           .create({to:'+91'+mobile, channel: 'sms'})
           .then(verification => console.log(verification.status));
