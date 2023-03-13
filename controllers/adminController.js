@@ -1,6 +1,8 @@
 const Admin = require("../models/adminModel");
 const bcrypt = require("bcrypt");
 
+
+//updated
 // getting user
 const User = require("../models/userModel");
 
