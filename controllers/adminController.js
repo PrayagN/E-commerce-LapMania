@@ -155,10 +155,7 @@ const loadDashboard = async (req, res,next) => {
     const totals = JSON.stringify(totalsArray);
     const totalSales = categorySales.map((sales)=>sales.sales);
     const categoryNames = categorySales.map((category) => category._id);
-    console.log(categoryNames);
     
-    
-    console.log(totalSales);
     
      
      
@@ -171,7 +168,7 @@ next(error.message)
 
 const loadCustomers = async (req, res) => {
   try {
-    // const userData = await User.find({is_verified:1})
+    
     var search = "";
     if (req.query.search) {
       search = req.query.search;
@@ -249,18 +246,6 @@ const loadCoupon = async(req,res,next)=>{
 
         
       });
-      // const today =new Date()
-      //   today.setHours(0, 0, 0, 0);
-      //   for(let i=0;i<coupons.length;i++){
-      //     const exp = coupons[i].expiryDate;
-      //   exp.setHours(0, 0, 0, 0);
-      //   }
-  
-      //   if(exp.getTime() <= today.getTime()) {
-
-      //     const updatedCoupon = await Coupon.findOneAndUpdate({code:coupons},{$set:{status:'expired'}})
-      //   }
-     
       res.render('coupon',{coupon:coupons})
        checkExpiredCoupons();
     }else{
@@ -309,7 +294,6 @@ const saveCoupon = async(req,res,next)=>{
           console.log("save not work");
         }
       } else {
-        console.log("coupon already exist");
         res.render("addCoupon",{message:"Coupon already exist.."});
       }
       res.render("addCoupon");
@@ -404,7 +388,6 @@ const loadSalesReport = async(req,res,next)=>{
       let start_date = new Date(req.body.start_date);
       let end_date = new Date(req.body.end_date); 
       const order = await Order.find({createdAt:{$gte:start_date,$lte:end_date},orderStatus:'Delivered'}).populate('userId').populate('products.productId').sort({createdAt:-1});
-      console.log(order);
       res.json({order})
     }else{
       res.redirect('/admin/login')
@@ -421,7 +404,6 @@ const exportData = async(req,res,next)=>{
     if(req.session.admin_id){
       console.log(req.query.start_Date);
       let start_date = new Date(req.query.start_Date);
-      console.log(start_date);
       let end_date = new Date(req.query.end_Date); 
       const salesData = await Order.find({createdAt:{$gte:start_date,$lte:end_date},orderStatus:'Delivered'}).populate('userId').populate('products.productId').sort({createdAt:-1});
         start_date = start_date.toLocaleString().slice(0,10);
@@ -448,7 +430,6 @@ const exportData = async(req,res,next)=>{
         pdf.create(ejsData, options).toStream((err, stream) => {
           if (err) reject(err);
           else resolve(stream);
-          console.log("here");
         });
       });
       const stream = await pdfPromise;

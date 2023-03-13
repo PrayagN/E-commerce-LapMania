@@ -3,7 +3,7 @@ const mongoose =  require("mongoose");
 mongoose.set('strictQuery',false)
 const tippy = require('tippy.js');
 
-mongoose.connect('mongodb://127.0.0.1:27017/Lap_store').then(() => {
+mongoose.connect(process.env.MONGODB_IP).then(() => {
   console.log('database connected');
 }).catch((err) => {
   console.log(err);
@@ -40,7 +40,7 @@ app.use(function(req, res, next) {
     }
   });
 app.use((error, req, res, next) => {
-    res.status(500).render('error', { message: error.message });
+    res.status(500).render('error');
   });
 
 app.listen(3000,function(){

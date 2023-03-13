@@ -39,11 +39,10 @@ const category = async (req,res,next) => {
       res.redirect("/admin");
     }
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
 next(error.message);
-;
   }
-};
+}
 
 const addCategory = async (req,res,next) => {
   try {
@@ -55,9 +54,9 @@ const addCategory = async (req,res,next) => {
   } catch (error) {
     console.log(error.message)
 next(error.message);
-;
+
   }
-};
+}
 
 const saveCategory = async (req,res,next) => {
   try {
@@ -93,9 +92,9 @@ const saveCategory = async (req,res,next) => {
   } catch (error) {
     console.log(error.message)
 next(error.message);
-;
+
   }
-};
+}
 
 const deleteCategory = async (req,res,next) => {
   try {
@@ -109,8 +108,6 @@ const deleteCategory = async (req,res,next) => {
        }else{
         res.json({success:false});
        }
-  
-
       // res.redirect("/admin/category");
     } else {
       res.redirect("/admin");
@@ -176,9 +173,6 @@ const loadProducts = async (req, res,next) => {
       if (req.query.search) {
         search = req.query.search;
       }
-      
-
-      
       const categoryName =await Category.find({},{_id:1})
     const  values = categoryName.map(category =>category._id)
     const ProductData = await Product.find({category:{$in:values},
@@ -189,9 +183,6 @@ const loadProducts = async (req, res,next) => {
         ],
     }).populate('category');
     const categories = await Category.find({__v:0})
-
-      
-
       res.render("products", { product :ProductData, category: categories });
     } else {
       res.redirect("/admin");
@@ -296,20 +287,7 @@ next(error.message);
   }
 };
 
-// Delete Product
-// const deleteProduct = async (req,res,next) => {
-//   try {
-//     const id = req.query.id;
 
-//     // await Product.deleteOne({ _id: id });
-//     await Product.findByIdAndUpdate({_id:id},{$set:{list:1}})
-//     res.redirect("/admin/products");
-//   } catch (error) {
-//     console.log(error.message);
-// next(error.message);
-
-//   }
-// };
 const  deleteProduct = async(req,res,next)=>{
   try {
     const id = req.query.id;
@@ -332,9 +310,6 @@ const  deleteProduct = async(req,res,next)=>{
 next(error.message);
   }
 }
-
-
-
 // edit Product
 const   editProduct = async (req,res,next) => {
   try {
@@ -372,8 +347,6 @@ next(error.message);
 // ;
 //   }
 // }
-
-
 
 // updated products
 const updatedProduct = async (req, res,next) => {
@@ -541,7 +514,7 @@ const updateStatus = async(req,res,next)=>{
   } catch (error) {
     console.log(error.message)
 next(error.message);
-;
+
   }
 }
 
@@ -570,7 +543,6 @@ const loadBanner = async(req,res,next)=>{
   } catch (error) {
     console.log(error.message)
 next(error.message);
-;
   }
 }
 
@@ -615,7 +587,6 @@ const saveBanner = async(req,res,next)=>{
   } catch (error) {
     console.log(error.message)
 next(error.message);
-;
   }
 }
 

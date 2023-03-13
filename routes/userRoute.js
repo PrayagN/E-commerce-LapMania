@@ -37,11 +37,6 @@ user_route.get('/signup',auth.isLogout,userController.loadSignup);
 
 user_route.post('/signup',userController.insertUser);
 
-// user_route.get('/login',auth.isLogout,userController.loadLogin)
-
-// user_route.get('/verify',userController.verifyMail);
-
-// user_route.post('/signin',userController.verifyLogin)
 
 user_route.get('/',userController.loadHome)
 
