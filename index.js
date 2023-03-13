@@ -39,9 +39,9 @@ app.use(function(req, res, next) {
       return;
     }
   });
-// app.use((error, req, res, next) => {
-//     res.status(500).render('error', { message: error.message });
-//   });
+app.use((error, req, res, next) => {
+    res.status(500).render('error', { message: error.message });
+  });
 
 app.listen(3000,function(){
     console.log("Started.....");
