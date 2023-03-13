@@ -1,0 +1,400 @@
+<%- include('../admin/header.ejs')   %>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"> -->
+
+	<!-- SIDEBAR -->
+  <section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">LapMania</span>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a href="/admin/home">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="/admin/customers">
+                    <i class='bx bxs-user-account'></i> 
+					<span class="text">Customers</span>
+				</a>
+			</li>
+			<li >
+				<a href="/admin/orders">
+					<i class='bx bxs-shopping-bags' ></i>
+					<span class="text">Orders</span>
+				</a>
+			</li >
+			<li >
+				<a href="/admin/category">
+					<i class='bx bx-category' ></i>
+					<span class="text">Categories</span>
+				</a>
+			</li>
+            <li >
+				<a href="/admin/Products">
+                    <i class='bx bxs-cart-alt' ></i>
+					<span class="text">Products</span>
+				</a>
+			</li>
+            <li class="active" >
+				<a href="/admin/banner">
+					<i class='bx bxs-carousel'></i>
+					<span class="text">Banner</span>
+				</a>
+			</li>
+            <li>
+				<a href="/admin/coupon">
+					<i class='bx bxs-coupon'></i>
+					<span class="text">Coupon</span>
+				</a>
+			</li>
+			<li  >
+				<a href="/admin/sales">
+					<i class='bx bx-money' ></i>
+					<span class="text">Sales</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			
+			<li >
+				<a href="/admin/logout" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+        <nav>
+			<i class='bx bx-menu'  style="display: none;"></i>
+			<a href="#" class="nav-link" style="display: none;">Categories</a>
+			<form action="#">
+				<div class="form-input" style="display: none;">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">8</span>
+			</a>
+			<a href="#" class="profile">
+				<img src="img/people.png">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Banner</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a class="active" href="/admin/Products">Banners</a>
+						</li>
+                        <li><li><i class='bx bx-chevron-right' ></i></li>
+							<a class="active" href="#">Add Banner</a>
+						</li>
+					</ul>
+				</div>
+                
+			</div>
+
+
+
+    <!-- <div class="container py-5"> -->
+      
+    <div class="" style="border-radius: 20px; background-color: #f9f9f9;"> 
+      <div class="row d-flex justify-content-center  ">
+        <!-- <div class="col-lg-4"> -->
+          <!-- <div class="card mb-4 mt-3 ms-4" style="background-color: #f9f9f9;">
+            <div class="card-body text-center">
+              <img src="https://benstore.com.ph/29085-home_default/asus-rog-strix-scar-15-g533zm-es93-156-gaming-laptop-300hz-i9-12900h-rtx-3060-6gb-16gb-ddr5-512gb-ssd-black-.jpg" alt="avatar"
+                class="img-fluid" style="width: 250px;" >
+             -->
+              <!-- <p class="text-muted mb-1">Full Stack Developer</p>
+              <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> -->
+              <!-- <div class="d-flex justify-content-center mb-2"> -->
+                <!-- <button type="button" class="btn btn-primary">Follow</button>
+                <button type="button" class="btn btn-outline-primary ms-1">Message</button> -->
+              <!-- </div> -->
+            <!-- </div> -->
+          <!-- </div> -->
+          <!-- <div class="card mb-4 mb-lg-0">
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fas fa-globe fa-lg text-warning"></i>
+                  <p class="mb-0">https://mdbootstrap.com</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                  <p class="mb-0">mdbootstrap</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                  <p class="mb-0">@mdbootstrap</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                  <p class="mb-0">mdbootstrap</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                  <p class="mb-0">mdbootstrap</p>
+                </li>
+              </ul>
+            </div>
+          </div> -->
+        <!-- </div> -->
+        <div class="col-lg-8 " >
+          <div class="card mb-4 mt-3 me-4" style="background-color: #f9f9f9;">
+            <div class="card-body">
+              <form action="/admin/addBanner" method="post" enctype="multipart/form-data" >
+                <% if(typeof message !== 'undefined'){ %>
+                  <p
+                    style="
+                      color: red;
+                      padding-left: 100px;
+                      padding-bottom: 30px;
+                    "
+                  >
+                    <%= message %>
+                  </p>
+                  <% } %>
+              <div class="row ">
+                <div class="col-sm-3">
+                  <p class="mb-0">title</p>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" name="banner" style="border: none;" >
+                </div>
+              </div>
+             
+
+              <hr>
+              
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Image</p>
+                </div>
+                <div class="col-sm-9">
+                  <div class="custom-file">
+                    <input type="file" name="image" accept=".JPEG,.JPG,.PNG" data-parsley-trigger ="change" id="customFile">
+                    <p id="alert" style="color: red;"></p>
+                   
+                </div>
+                </div>
+              </div>
+              
+              <hr>
+			  <div class="row ">
+                <div class="col-sm-3">
+                  <p class="mb-0">Description</p>
+                </div>
+                <div class="col-sm-9">
+                    <textarea name="description" id="" cols="50" rows="2"></textarea>
+                </div>
+              </div>
+			  <hr>
+              <button type="submit" class="btn btn-primary">submit</button>
+
+              </form>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col-md-6">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                  </p>
+                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                  <div class="progress rounded mb-2" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                  </p>
+                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                  <div class="progress rounded mb-2" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+ 
+        </div> -->
+    </div>
+			
+    <input type="file" accept="image/*" onchange="previewImage(event)">
+    <canvas id="canvas"></canvas>
+    <button onclick="cropImage()">Crop Image</button>
+
+
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+   
+
+
+  <script>
+function previewImage(event) {
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+  const img = new Image();
+  img.onload = function() {
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+  }
+  img.src = URL.createObjectURL(event.target.files[0]);
+}
+let isDragging = false;
+let startX, startY, mouseX, mouseY;
+
+canvas.addEventListener('mousedown', function(e) {
+  startX = e.offsetX;
+  startY = e.offsetY;
+  isDragging = true;
+});
+
+canvas.addEventListener('mousemove', function(e) {
+  if (isDragging) {
+    mouseX = e.offsetX;
+    mouseY = e.offsetY;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0);
+    ctx.strokeStyle = '#ff0000';
+    ctx.strokeRect(startX, startY, mouseX - startX, mouseY - startY);
+  }
+});
+
+canvas.addEventListener('mouseup', function(e) {
+  isDragging = false;
+});
+
+function cropImage() {
+  const croppedCanvas = document.createElement('canvas');
+  const croppedCtx = croppedCanvas.getContext('2d');
+  const width = mouseX - startX;
+  const height = mouseY - startY;
+  croppedCanvas.width = width;
+  croppedCanvas.height = height;
+  const croppedImage = ctx.getImageData(startX, startY, width, height);
+  croppedCtx.putImageData(croppedImage, 0, 0);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  canvas.width = width;
+  canvas.height = height;
+  ctx.drawImage(croppedCanvas, 0, 0);
+}
+
+
+
+
+
+
+
+
+    const  input = document.querySelector('input[type="file"]');
+    input.addEventListener('change',()=>{
+      const file = input.files[0];
+      if(!file.type.includes('image/')){
+        // alert(' Image file should be jpg,jpeg,png.try again');
+        const alert= document.getElementById('alert').textContent="File type is not allowed. Only JPG,JPEG and PNG images are allowed."
+  
+        input.value = '';
+      }
+      const reader = new FileReader();
+      reader.addEventListener('load',()=>{
+  
+      })
+      reader.readAsDataURL(file);
+    })
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include('../admin/footer.ejs') %>

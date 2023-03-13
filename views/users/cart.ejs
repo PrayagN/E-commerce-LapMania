@@ -1,0 +1,327 @@
+<%-include('../layouts/websitehead.ejs')%>
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-dark mb-30">
+        <div class="row px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a class="btn d-flex align-items-center justify-content-between  w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+                    <h6 class="text-white m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
+                    <i class="fa fa-angle-down text-white"></i>
+                </a>
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                    <div class="navbar-nav w-100">
+                       <% for(let i=0 ;i<categoryData.length ;i++){%>
+                            <a href="/shop?id=<%= categoryData[i]._id %>" class="nav-item nav-link"><%= categoryData[i].name%></a>
+                      <% } %>
+
+                        
+                        
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <span class="h2 text-dark bg-light px-2">Lap</span>
+                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Mania</span>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="/home" class="nav-item nav-link">Home</a>
+                            <a href="/shop" class="nav-item nav-link">Shop</a>
+                            <!-- <a href="/detail" class="nav-item nav-link">Shop Detail</a> -->
+                            
+                            <a href="/contact" class="nav-item nav-link">Contact</a>
+                        </div>
+                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                            <a href="/profile" class="btn me-4 ">
+                                <% if(typeof userData !== 'undefined'){%>
+                                        <p class="text-uppercase text-white pt-3 px-4"><%=userData.name%></p>
+                               <% } %>
+                               
+                                
+                            </a>
+                            <% if(typeof userData !== 'undefined'){%>
+                               <a href="/wishlist" class="btn px-0">
+                                                                <i class="fas fa-heart text-primary"></i>
+                                                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;"><%=wishlistCount%></span>
+                                                               
+                                                                </a>
+                                                            <a href="/cart" class="btn px-0 ml-3">
+                                                                <i class="fas fa-shopping-cart text-warning"></i>
+                                                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;"><%=cartCount%></span>
+                                                                <!-- <span class="cart-badge text-white " style="font-size: small; padding-top: 10px;"><%=cartCount%></span> -->
+                                                                
+                                                                </a>
+                                                               
+
+
+                        <% }else{%>
+
+                            <a href="/login" class="btn px-0" >
+                                <i class="fas fa-heart text-primary"></i>
+                                </a>
+                            <a href="/login" class="btn px-0 ml-3">
+                                <i class="fas fa-shopping-cart text-primary"></i>
+                                </a>
+        
+
+                       <% } %>
+                            
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+   
+
+   
+    <!-- Cart Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <table class="table table-light table-borderless table-hover text-center mb-0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <!-- <th>image</th> -->
+                            <th>Products</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                       
+                        <%if(cartData){
+
+                        
+                        
+                        if(cartData.products.length >0){
+                         for(let i=0;i< cartData.products.length;i++){%>
+                            
+                         <tr>  
+                            <% if (cartData.products[i].productId.stocks == 0) { %>
+                            <td class="align-middle">
+                               
+                                    <span class="badge badge-danger" style="position: absolute;">Out of Stock</span>
+                                                       
+                                <img  src="/productImages/<%=cartData.products[i].productId.image[0] %>" alt="" style="width: 6.25rem; height: 6.25rem;"><span style="display:inline-block;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                max-width: 16ch;"><%=cartData.products[i].productId.name%></span></td>
+                                <%}else{%>
+                                    <td class="align-middle"><img  src="/productImages/<%=cartData.products[i].productId.image[0] %>" alt="" style="width: 6.25rem; height: 6.25rem;"><span style="display:inline-block;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        max-width: 16ch;"><%=cartData.products[i].productId.name%></span></td>
+                               <%}%>  
+                                 
+                           <td class="d-flex align-items-center justify-content-center" > <span style="display:inline-block;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                max-width: 18ch;
+                                margin-top: 100px;" ></span>&#x20B9;<%=cartData.products[i].productId.offerPrice%></td>
+                            <!-- <td class="align-middle"></td> -->
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-minus" onclick="decrement('<%=cartData.products[i].productId._id%>')" >
+                                        <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="hidden" id="stocks-cartData.products[i].productId._id%>" value="<%=cartData.products[i].productId.stocks%>">
+                                    <input type="text" id="<%=cartData.products[i].productId._id%>" class="form-control form-control-sm bg-secondary border-0 text-center" value="<%=cartData.products[i].quantity%>">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-plus" onclick="increment('<%=cartData.products[i].productId._id%>','<%=cartData.products[i].productId.stocks%>')" >
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td> 
+                            <td class="align-middle" ><ul style="float: left;" class="my-1">&#x20B9;</ul> <p id="total-<%=cartData.products[i].productId._id%>" class="my-1" style="float: left;"> <%=cartData.products[i].price%></p> </td>
+                            <td class="align-middle"><button onclick="location.href='/removeCart?id=<%=cartData.products[i].productId._id%>'"  class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                        
+                         </tr>
+                            <%}%>       
+                                                 
+                     <%}else{ %>
+                         <tr>
+                            <td colspan="5"> Cart is empty</td>
+                        </tr>
+                        
+                       <% }%>
+                       <%}else{ %>
+                        <tr>
+                           <td colspan="5"> Cart is empty</td>
+                       </tr>
+                       
+                      <% }%>
+                       
+                    </tbody>
+                </table>
+            </div>
+            <%if(cartData){%>
+
+            <div class="col-lg-4">
+                <form class="mb-30" action="">
+                    
+                </form>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="border-bottom pb-2">
+                        <div class="d-flex justify-content-between  mb-3">
+                            <% let money =0; for(let i=0;i<cartData.products.length;i++){
+                                money +=cartData.products[i].price;}%>
+                            <h6 >Subtotal</h6>
+                            <h6 >&#x20B9; <span id="subtotal"><%=money%> </span></h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium">Free Shipping</h6>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <% let overAll =0;for(let j=0;j<cartData.products.length;j++){
+                                overAll+=cartData.products[j].price;}%>
+                            
+                            <h5>Total</h5>
+                            <h5 >&#x20B9; <span id="overAll"><%=overAll%> </span></h5>
+                        </div>
+                        <% if (cartData.products.length > 0) { %>
+                            <% if (cartData.products.every(products => products.productId.stocks >0)){ %>
+                                <a href="/checkout">
+                                  <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed to Checkout</button>
+                                </a>
+                              <% } else { %>
+                                <button  class="btn btn-block btn-secondary font-weight-bold my-3 py-3  ">please remove Out of Stock products </button>
+                              <% } %>
+                               <% } else { %>
+                            
+                        <% } %>
+                        </div>
+
+                       
+                </div>
+            </div>
+        <%}%>
+        </div>
+    </div>
+    <!-- Cart End -->
+
+
+    <!-- Footer Start -->
+
+    <script>
+         const decrementButtons = document.querySelectorAll('.btn-minus');
+        const incrementButtons = document.querySelectorAll('.btn-plus');
+      
+        decrementButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const input = button.parentNode.parentNode.querySelector('input[type="text"]');
+            const value = parseInt(input.value);
+            if (value > 1) {
+              input.value = value - 1;
+            }
+          });
+        });
+      
+        incrementButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const input = button.parentNode.parentNode.querySelector('input[type="text"]');
+            const inp = button.parentNode.parentNode.querySelector('input[type="hidden"]')
+            const value = parseInt(input.value);    
+            const stocks = parseInt(inp.value);
+            
+            if(value<stocks){
+                input.value = value + 1;
+
+            }
+            
+           
+
+          });
+        });
+ 
+ 
+ function increment( productId,stocks){ 
+    const quantity = document.getElementById(productId);
+    console.log(quantity);
+    const qty = Number(quantity.value)+1 ;
+    console.log(qty);
+
+    console.log(stocks);
+    if(qty<=stocks){
+        $.ajax({
+        url:`cart/${ productId}`,
+        method:'get', 
+        
+        success: function(response){
+            document.getElementById(`total-${productId}`).textContent = response.updatedPrice;
+            document.getElementById(`subtotal`).textContent = response.total;
+            document.getElementById('overAll').textContent = response.total;
+        }
+
+    })
+    }else{
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'warning',
+  title: 'Sorry item is limited'
+})
+    }
+        
+    
+        
+    
+    
+ }
+ 
+ function decrement( productId){
+    console.log("decrement ethi");
+    const qty =document.getElementById(productId);
+    const currentqty = qty.value;
+    if(currentqty >1){
+        $.ajax({
+        url:`cart/${ productId}`,
+        method:'post',
+
+        success: function(response){
+            document.getElementById(`total-${productId}`).textContent = response.updatedPrice;
+            document.getElementById('subtotal').textContent = response.total;
+            document.getElementById('overAll').textContent = response.total;
+        }
+    })
+    
+    }else{
+        console.log("dont do that");
+    }
+ }
+ 
+ 
+ 
+ 
+ 
+ </script>
+ 
+
+<%-include('../layouts/websitefooter.ejs')%>

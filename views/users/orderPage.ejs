@@ -1,0 +1,266 @@
+<%- include('../layouts/websitehead.ejs')%>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');body{background-color:#F5F5F5;font-family: 'Montserrat', sans-serif}.card{border:none}.logo{background-color: #eeeeeea8}.totals tr td{font-size: 13px}.footer{background-color: #eeeeeea8}.footer span{font-size: 12px}.product-qty span{font-size: 12px;color: #dedbdb}
+</style>
+<div class="container mt-5 mb-5">
+
+    <div class="row d-flex justify-content-center">
+
+        <div class=" col-12">
+
+            <div class="card">
+
+
+                    <div class="text-left logo p-2 px-5">
+
+                        <!-- <img src="https://i.imgur.com/2zDU056.png" width="50"> -->
+                        
+
+                    </div>
+
+                    <div class="invoice p-5">
+
+                        <h5>Your order Confirmed!</h5>
+
+                        <span class="font-weight-bold d-block mt-4">Hello, <%=userData.name%></span>
+                        <span>You order has been confirmed and will be shipped in next two days!</span>
+
+                        <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+
+                            <table class="table table-borderless">
+                                
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="py-2">
+
+                                                <span class="d-block text-muted">Order Date</span>
+                                            <span><%=orderData.date%></span>
+                                                
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="py-2">
+
+                                                <span class="d-block text-muted">Order No</span>
+                                            <span><%=orderData._id%></span>
+                                                
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="py-2">
+
+                                                <span class="d-block text-muted">Payment</span>
+                                            <!-- <span><img src="https://img.icons8.com/color/48/000000/mastercard.png" width="20" /></span> -->
+                                            <span><%=orderData.paymentMethod%></span>
+                                                
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="py-2">
+
+                                                <span class="d-block text-muted">Shiping Address</span>
+                                            <span><%=addressArray%> </span>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+                            
+                        </div>
+
+
+
+
+                            <div class="product border-bottom table-responsive">
+
+                                <table class="table table-borderless">
+
+                                <tbody>                                   
+                                   
+                                    <% for(let i=0;i<data.length;i++){%>
+                                       <tr>  
+                                        <td width="20%">
+                                        
+                                        <img src="/productImages/<%=data[i].productId[0].image[0] %>" width="70">
+
+                                    </td>
+                                    
+
+                                    
+                                    <td width="60%">
+                                        <span class="font-weight-bold"><%=data[i].productId[0].name%></span>
+                                        <div class="product-qty">
+                                            <span class="d-block text-muted">quantity</span>
+                                            <span class="d-block"><%=data[i].quantity%></span>
+                                            <!-- <span>Color:Orange</span> -->
+                                            
+                                        </div>
+                                    </td>
+                                    <td width="20%">
+                                        <div class="text-right">
+                                            <span class="font-weight-bold">&#x20B9;<%=data[i].price%></span>
+                                        </div>
+                                    </td>
+                                    </tr>
+                                    <%}%>
+                                   
+                                </tbody> 
+                                    
+                                </table>
+                                
+
+
+                            </div>
+
+
+
+                            <div class="row d-flex justify-content-end">
+
+                                <div class="col-md-5">
+
+                                    <table class="table table-borderless">
+
+                                        <tbody class="totals">
+
+                                            <tr>
+                                                <td>
+                                                    <div class="text-left">
+
+                                                        <span class="text-muted">Subtotal</span>
+                                                        
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-right">
+                                                        <% let money =0; for(let i=0;i<data.length;i++){
+                                                            money +=data[i].price;}%>
+                                                        <span>&#x20B9;<%=money%></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                             <tr>
+                                                <td>
+                                                    <div class="text-left">
+                                                            
+                                                        <span class="text-muted">Shipping Fee</span>
+                                                        
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-right">
+                                                        <span>Free</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                             <!-- <tr>
+                                                <td>
+                                                    <div class="text-left">
+
+                                                        <span class="text-muted">Tax Fee</span>
+                                                        
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-right">
+                                                        <span>$7.65</span>
+                                                    </div>
+                                                </td>
+                                            </tr> -->
+
+
+                                             <tr>
+                                                <td>
+                                                    <div class="text-left">
+
+                                                        <span class="text-muted">Discount</span>
+                                                        
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-right">
+                                                        <%let discount = orderData.total - money%>
+                                                        <span class="text-success">&#x20B9;<%=discount%></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                             <tr class="border-top border-bottom">
+                                                <td>
+                                                    <div class="text-left">
+
+                                                        <span class="font-weight-bold">Total</span>
+                                                        
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-right">
+                                                        <span class="font-weight-bold">&#x20B9;<%=orderData.total%></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                        
+                                    </table>
+                                    
+                                </div>
+                                
+
+
+                            </div>
+
+
+                            <p>We will be sending shipping confirmation email when the item shipped successfully!</p>
+                            <p class="font-weight-bold mb-0">Thanks for shopping with us!</p>
+                            <span>Lap Mania</span>
+                            <br><br>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" onclick="location.href='/orderlist'" class="btn bg-primary text-white">My Orders</button>
+                            <!-- <button  type="button" onclick="location.href='/orderlist'" class="btn bg-primary text-white ">Back to Shop</button> -->
+
+                            </div>
+                            
+                        
+
+                    </div>
+
+
+                    <div class="d-flex justify-content-between footer p-3">
+
+                        <!-- <span>Need Help? visit our <a href="#"> help center</a></span>
+                         <span>12 June, 2020</span>
+                         -->
+                    </div>
+
+
+
+        
+    </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+
+
+
+
+<%-include('../layouts/websitefooter.ejs')%>

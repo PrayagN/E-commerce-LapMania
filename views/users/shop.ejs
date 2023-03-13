@@ -1,0 +1,384 @@
+<%-include('../layouts/websitehead.ejs')%>
+
+<style>
+    .pagination {
+      display: inline-block;
+    }
+    
+    .pagination a {
+      color: black;
+      float: left;
+      padding: 8px 16px;
+      text-decoration: none;
+      border: 1px solid #ddd;
+    }
+    
+    .pagination a.active {
+      background-color: #4CAF50;
+      color: white;
+      border: 1px solid #4CAF50;
+    }
+    
+    .pagination a:hover:not(.active) {background-color: #ddd;}
+    
+    .pagination a:first-child {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    
+    .pagination a:last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+    </style>
+    <!-- Navbar End -->
+    <div class="container-fluid bg-dark mb-30">
+        <div class="row px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a class="btn d-flex align-items-center justify-content-between  w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+                    <h6 class="text-white m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
+                    <i class="fa fa-angle-down text-white"></i>
+                </a>
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                    <div class="navbar-nav w-100">
+                      <% for(let i=0 ;i<categoryData.length ;i++){%>
+                            <a href="/shop?id=<%= categoryData[i]._id %>"  class="nav-item nav-link"><%= categoryData[i].name%></a>
+                      <% } %>
+
+                        
+                        
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <span class="h2 text-dark bg-light px-2">Lap</span>
+                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Mania</span>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="/home" class="nav-item nav-link">Home</a>
+                            <a href="/shop" class="nav-item nav-link active">Shop</a>
+                            <!-- <a href="/detail" class="nav-item nav-link">Shop Detail</a> -->
+                            
+                            <a href="/contact" class="nav-item nav-link">Contact</a>
+                        </div>
+                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                            <a href="/profile" class="btn me-4 ">
+                                <% if(typeof userData !== 'undefined'){%>
+                                        <p class="text-uppercase text-white pt-3 px-4"><%=userData.name%></p>
+                               <% } %>
+                               
+                                
+                            </a>
+                            <% if(typeof userData !== 'undefined'){%>
+                               <a href="/wishlist" class="btn px-0">
+                                                                <i class="fas fa-heart text-primary"></i>
+                                                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;"><%=wishlistCount%></span>
+                                                               
+                                                                </a>
+                                                            <a href="/cart" class="btn px-0 ml-3">
+                                                                <i class="fas fa-shopping-cart text-primary"></i>
+                                                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;"><%=cartCount%></span>
+                                                                <!-- <span class="cart-badge text-white " style="font-size: small; padding-top: 10px;"><%=cartCount%></span> -->
+                                                                
+                                                                </a>
+                                                               
+
+
+                        <% }else{%>
+
+                            <a href="/login" class="btn px-0" >
+                                <i class="fas fa-heart text-primary"></i>
+                                </a>
+                            <a href="/login" class="btn px-0 ml-3">
+                                <i class="fas fa-shopping-cart text-primary"></i>
+                                </a>
+        
+
+                       <% } %>
+                            
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid d-flex justify-content-end mb-4 " style="padding-right: 1.9375rem;">
+        <div class="row px-xl-5">
+            <div class="ml-2 ">
+                <div class="btn-group">
+                   <!-- <label for="sort-select">Sorting:</label> -->
+<select id="sort-select" onchange="searchProduct()">
+    <option value="Price">Price</option>
+  <option value="Low to High">Low to High</option>
+  <option value="High to Low">High to Low</option>
+  <!-- <option value="Best Rating">Best Rating</option> -->
+</select>
+
+                </div>
+                <!-- <div class="btn-group ml-2">
+                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">10</a>
+                        <a class="dropdown-item" href="#">20</a>
+                        <a class="dropdown-item" href="#">30</a>
+                    </div>
+                </div> -->
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Shop Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <!-- Shop Sidebar Start -->
+            <div class="col-lg-3 col-md-4">
+                <!-- Price Start -->
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by Brand</span></h5> 
+                <div class="bg-light p-4 mb-30"> 
+                    <form>
+                        <% brand.forEach((brand, index) => { %>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" onclick="searchProduct()" name="brand" value="<%=brand%>">
+                                <label class="form-check-label" ><%= brand %></label>
+                              </div>
+                          <% }); %>
+                           
+                          
+                        <!-- <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-1">
+                            <label class="custom-control-label" for="price-1">$0 - $100</label>
+                            <span class="badge border font-weight-normal">150</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-2">
+                            <label class="custom-control-label" for="price-2">$100 - $200</label>
+                            <span class="badge border font-weight-normal">295</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-3">
+                            <label class="custom-control-label" for="price-3">$200 - $300</label>
+                            <span class="badge border font-weight-normal">246</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-4">
+                            <label class="custom-control-label" for="price-4">$300 - $400</label>
+                            <span class="badge border font-weight-normal">145</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                            <input type="checkbox" class="custom-control-input" id="price-5">
+                            <label class="custom-control-label" for="price-5">$400 - $500</label>
+                            <span class="badge border font-weight-normal">168</span>
+                        </div> -->
+                    </form> 
+                </div> 
+                <!-- Price End -->
+                
+                <!-- Color Start -->
+                <!-- <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
+                <div class="bg-light p-4 mb-30">
+                    <form>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" checked id="color-all">
+                            <label class="custom-control-label" for="price-all">All Color</label>
+                            <span class="badge border font-weight-normal">1000</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="color-1">
+                            <label class="custom-control-label" for="color-1">Black</label>
+                            <span class="badge border font-weight-normal">150</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="color-2">
+                            <label class="custom-control-label" for="color-2">White</label>
+                            <span class="badge border font-weight-normal">295</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="color-3">
+                            <label class="custom-control-label" for="color-3">Red</label>
+                            <span class="badge border font-weight-normal">246</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="color-4">
+                            <label class="custom-control-label" for="color-4">Blue</label>
+                            <span class="badge border font-weight-normal">145</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                            <input type="checkbox" class="custom-control-input" id="color-5">
+                            <label class="custom-control-label" for="color-5">Green</label>
+                            <span class="badge border font-weight-normal">168</span>
+                        </div>
+                    </form>
+                 </div> -->
+                <!-- Color End -->
+
+                <!-- Size Start -->
+                 <!-- <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by size</span></h5>
+                 <div class="bg-light p-4 mb-30"> 
+                    <form>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" checked id="size-all">
+                            <label class="custom-control-label" for="size-all">All Size</label>
+                            <span class="badge border font-weight-normal">1000</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"> 
+                            <input type="checkbox" class="custom-control-input" id="size-1">
+                            <label class="custom-control-label" for="size-1">XS</label>
+                            <span class="badge border font-weight-normal">150</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="size-2">
+                            <label class="custom-control-label" for="size-2">S</label>
+                            <span class="badge border font-weight-normal">295</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="size-3">
+                            <label class="custom-control-label" for="size-3">M</label>
+                            <span class="badge border font-weight-normal">246</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="size-4">
+                            <label class="custom-control-label" for="size-4">L</label>
+                            <span class="badge border font-weight-normal">145</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                            <input type="checkbox" class="custom-control-input" id="size-5">
+                            <label class="custom-control-label" for="size-5">XL</label>
+                            <span class="badge border font-weight-normal">168</span>
+                        </div>
+                    </form>
+                </div>  -->
+                <!-- Size End -->
+            </div>
+            <!-- Shop Sidebar End -->
+
+
+            <!-- Shop Product Start -->
+            <div class="col-lg-9 col-md-8">
+                <div class="row pb-3" id="searched">
+                    <div class="col-12 pb-1">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div style="visibility: hidden;" >
+                                <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
+                                <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <% for(let i=0; i<productData.length ;i++){%>
+                            <div class="col-lg-4 col-md-6 col-sm-6 pb-1" >
+                            <div class="product-item bg-light mb-4">
+                            <div class="product-img position-relative overflow-hidden">
+                                <% if (productData[i].stocks == 0) { %>
+                                    <span class="badge badge-danger" style="position: absolute;">Out of Stock</span>
+                                  <% } %>
+                                <img class="img-fluid w-100" src="/productImages/<%=productData[i].image[0];%>" style="height: 16rem;" alt="">
+                                <div class="product-action d-flex justify-content-end" style="padding-top: 210px;">
+                                    <% if(typeof userData !== 'undefined'){%>
+                                        <%if (productData[i].stocks == 0) {%>
+                                                 <%}else{%>
+                                        
+                                                 <%}%>
+                                    <%if( wishlistData && wishlistData.products.includes(productData[i]._id)){%>
+                                        <a class="btn  " onclick="wishlist('<%=productData[i]._id%>')" ><i id="wish-<%=productData[i]._id%>" class="bx bxs-heart bx-tada text-danger"></i></a>
+                                        <%}else{%>
+                                        <a class="btn " onclick="wishlist('<%=productData[i]._id%>')" ><i id="wish-<%=productData[i]._id%>" class="fas fa-heart "></i></a>
+                                     
+                                             <%}%>   
+                                             
+                                    <%}else{%>
+
+                                        <a class="btn " href="/login"><i class="fa fa-shopping-cart"></i></a>
+                                        <a class="btn " href="/login"><i class="fas fa-heart"></i></a>
+                                        
+                                     <a class="btn " href="/productdetail?id=<%= productData[i]._id %>"><i class="fa fa-search"></i></a>
+                                    
+                                    <%}%>
+                                        
+                                       
+                    
+                                </div>
+                                
+                            </div>
+                            <div class="text-center ">
+                                
+                                <div style=" font-size: medium; color: black; word-wrap: break-word; display: -webkit-box; -webkit-box-orient: vertical; text-overflow: ellipsis; -webkit-line-clamp: 2; overflow: hidden;">
+                                    <a class="text-dark" style="text-decoration: none;" href="/productdetail?id=<%= productData[i]._id %>">  <%= productData[i].name %></a>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                   <h5 style="font-size: 16px;">&#x20B9;<%=productData[i].offerPrice%></h5><h6 class="text-muted ml-2"><del style="font-size: 16px;">&#x20B9;<%=productData[i].price%></del></h6>
+                                        
+                                </div>
+                                
+                                
+                                <div class="d-flex align-items-center justify-content-center mb-1">
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    <small class="fa fa-star text-primary mr-1"></small>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <% }%>
+                     
+                    
+                </div>
+                <div class='pagination d-flex justify-content-end'>
+                    <nav aria-label="...">
+                      <ul class="pagination pagination-circle" style="display: inline;">
+                        <% if (currentPage == 1) { %>
+                          <li class="page-item disabled" style="display: inline;">
+                            <a class="page-link">Previous</a>
+                          </li>
+                        <% } else { %>
+                          <li class="page-item" style="display: inline-block;">
+                            <a class="page-link" href="?page=<%= currentPage - 1%>">Previous</a>
+                          </li>
+                        <% } %>
+                        <% for(let j = 1; j <= totalPages; j++) { %>
+                          <% if (j == currentPage) { %>
+                            <li class="page-item active" aria-current="page" style="display: inline-block;">
+                                <a class="page-link" href="#"  id="page"><%= j %></a>
+                              <!-- <a class="page-link"  id="pages"> <span class="visually-hidden"></span></a> -->
+                            </li>
+                          <% } else { %>
+                            <li class="page-item" style="display: inline-block;">
+                              <a class="page-link" href="?page=<%= j %>"><%= j %></a>
+                            </li>
+                          <% } %>
+                        <% } %>
+                        <% if (currentPage == totalPages) { %>
+                          <li class="page-item disabled" style="display: inline-block;">
+                            <a class="page-link">Next</a>
+                          </li>
+                        <% } else { %>
+                          <li class="page-item" style="display: inline-block;">
+                            <a class="page-link" href="?page=<%= parseInt(currentPage) + 1%>">Next</a>
+                          </li>
+                        <% } %>
+                      </ul>
+                    </nav>
+                  </div>
+                  
+               
+            </div>
+            <!-- Shop Product End -->
+        </div>
+    </div>
+    <!-- Shop End -->
+
+
+    <!-- Footer Start -->
+<%-include('../layouts/websitefooter.ejs')%>

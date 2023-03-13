@@ -1,0 +1,392 @@
+<%- include('../admin/header.ejs')   %>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"> -->
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">LapMania</span>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a href="/admin/home">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="/admin/customers">
+                    <i class='bx bxs-user-account'></i> 
+					<span class="text">Customers</span>
+				</a>
+			</li>
+			<li >
+				<a href="/admin/orders">
+					<i class='bx bxs-shopping-bags' ></i>
+					<span class="text">Orders</span>
+				</a>
+			</li >
+			<li >
+				<a href="/admin/category">
+					<i class='bx bx-category' ></i>
+					<span class="text">Categories</span>
+				</a>
+			</li>
+            <li class="active" >
+				<a href="/admin/Products">
+                    <i class='bx bxs-cart-alt' ></i>
+					<span class="text">Products</span>
+				</a>
+			</li>
+            <li >
+				<a href="/admin/banner">
+					<i class='bx bxs-carousel'></i>
+					<span class="text">Banner</span>
+				</a>
+			</li>
+            <li>
+				<a href="/admin/coupon">
+					<i class='bx bxs-coupon'></i>
+					<span class="text">Coupon</span>
+				</a>
+			</li>
+			<li  >
+				<a href="/admin/sales">
+					<i class='bx bx-money' ></i>
+					<span class="text">Sales</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			
+			<li >
+				<a href="/admin/logout" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+        <nav>
+			<i class='bx bx-menu'  style="display: none;"></i>
+			<a href="#" class="nav-link" style="display: none;">Categories</a>
+			<form action="#">
+				<div class="form-input" style="display: none;">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">8</span>
+			</a>
+			<a href="#" class="profile">
+				<img src="img/people.png">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Products</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a class="active" href="/admin/Products">Products</a>
+						</li>
+                        <li><li><i class='bx bx-chevron-right' ></i></li>
+							<a class="active" href="#">Add Products</a>
+						</li>
+					</ul>
+				</div>
+                
+			</div>
+
+
+
+
+    <div class="" style="border-radius: 20px; background-color: #f9f9f9;"> 
+      <div class="row d-flex justify-content-center  ">
+       
+        <div class="col-lg-8 " >
+          <div class="card mb-4 mt-3 me-4" style="background-color: #f9f9f9;">
+            <div class="card-body">
+              <form action="" method="post" enctype="multipart/form-data" id="validate">
+              <div class="row ">
+                <div class="col-sm-3">
+                  <p class="mb-0">Product</p>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" name="name" style="border: none;" required >
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Gross Price</p>
+                </div>
+                <div class="col-sm-9">
+                <input type="number" id="grossprice" name="price" style=" border: none;" required >
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0"> Offer Price</p>
+                </div>
+                <div class="col-sm-9">
+                <input type="number" id="offerprice" name="offerPrice" style=" border: none;" required >
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Image</p>
+                </div>
+                <div class="col-sm-9">
+                  <div class="custom-file">
+                    <label for="Tooltips" class="error"></label>
+                    <input type="file" name="image" multiple accept=".webp,.jpg,.jpeg,.png"  data-parsley-trigger ="change" id="customFile" onchange="showPreview(event)"  required >
+                    <p id="alert" style="color: red;"></p>
+                      
+                </div>
+                
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Brand</p>
+                </div>
+                <div class="col-sm-9">
+                <input type="text" name="brand" style=" border: none;" required >
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Processor</p>
+                </div>
+                <div class="col-sm-9">
+                <input type="text" name="processor" style=" border: none;"  >
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Ram Memory</p>
+                </div>
+                <div class="col-sm-9">
+                <input type="text" name="ram" style=" border: none;"  >
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Storage</p>
+                </div>
+                <div class="col-sm-9">
+                <input type="text" name="storage" style=" border: none;" >
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Operating System</p>
+                </div>
+                <div class="col-sm-9">
+                <input type="text" name="os" style=" border: none;" >
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Categories</p>
+                </div>
+                <div class="col-sm-9">
+                <select style="border: none;" id="category"  name="categories1" required>
+                    <option value="">Categories</option>
+                    <% for(category of categories){%>
+                      <option value="<%= category._id %>">
+                        <%= category.name %>
+                      </option>
+                    <% } %>
+                    
+                </select>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Stock</p>
+                </div>
+                <div class="col-sm-9">
+                    <input type="number" name="stock"  style="width: 100px; border: none;"  required>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0"> Description</p>
+                </div>
+                <div class="col-sm-9">
+                    <!-- <input type="text" style="width: 500px; height: 200px; border:none" > -->
+                    <textarea name="description" id="" cols="30" rows="10" style="width: 30em; height: 10em;" required></textarea> 
+                </div>
+              </div>
+              
+              <button type="submit" onclick="validate()" class="btn btn-primary">submit</button>
+
+              </form>
+            </div>
+          </div>
+          
+    </div>
+			
+            
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+   
+
+
+<style>
+  .error{
+    position:absolute;
+    top: -110%; left: 21%;
+    padding: 1% 20%;
+    border-radius: 3px;
+    background-color: aqua;
+    color:black;
+
+  }
+</style>
+
+<script>
+  const input = document.querySelector('input[type="file"]');
+const fileInput = document.getElementById('customFile'); // Replace fileInput with the ID of your input field
+
+input.addEventListener('change', () => {
+  const file = input.files[0];
+
+  if (!file.type.includes('image/')) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    });
+
+    Toast.fire({
+      icon: 'error',
+      title: 'File type is not allowed. Only JPG,JPEG and PNG images are allowed.'
+    });
+
+    input.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.addEventListener('load', () => {
+    // Do something with the loaded file
+  });
+
+  reader.readAsDataURL(file);
+});
+
+fileInput.addEventListener('change', () => {
+  if (fileInput.files.length > 4) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    });
+
+    Toast.fire({
+      icon: 'error',
+      title: 'You can only select up to 4 photos'
+    });
+
+    fileInput.value = '';
+  }
+});
+
+
+// Prevent form submission
+$('#validate').addEventListener("click" ,function(e){
+  e.preventDefault();
+  
+  // Get the values of the input fields
+  const grossprice = $('#grossprice').val();
+  const offerprice = $('#offerprice').val();
+  
+  // Check if offerprice is greater than or equal to grossprice
+  if (offerprice >= grossprice) {
+    
+    // Show a toast message using SweetAlert
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'error',
+      title: 'Offer Price should be lesser than Gross Price.'
+    })
+  }
+})
+
+
+
+</script>
+
+
+
+
+
+
+
+
+<%- include('../admin/footer.ejs') %>

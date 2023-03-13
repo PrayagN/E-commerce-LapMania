@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <style>
+    input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+  </style>
+
+<div class="form-gap "></div>
+<div class="container ">
+	<div class="row   ">
+		<div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="text-center">
+                  <!-- <h3><i class="fa fa-lock fa-4x"></i></h3> -->
+                
+                  <h2 class="text-center">Number Here!</h2>
+                  <p></p>
+                  <div class="panel-body">
+    
+                    <form id="register-form" action="/otp" role="form" autocomplete="off" class="form" method="post">
+    
+                      <div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-unlock "></i></span>
+                          <input  name="number" placeholder="Enter your number" id="mobile" class="form-control"  type="number">
+                        </div>
+                        <input type="hidden" name="user_id">
+
+                      </div>
+                      <div class="form-group">
+                        <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="submit" type="submit">
+                      </div>
+                      <div > 
+                        <%
+                    if(typeof message !== 'undefined'){
+                    %>
+                    <p style="color: red; padding-left: 100px; padding-bottom: 30px;"> <%= message %></p>
+                    <%
+                    }
+                    %></div>
+                      <input type="hidden" class="hide" name="token" id="token" value=""> 
+                    </form>
+    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+	</div>
+</div>
+
+
+<script>
+  let mobileNumber = document.getElementById('mobile');
+mobileNumber.addEventListener('input', function() {
+  const regex = /^[0-9]{10}$/;
+
+  if (!regex.test(mobileNumber.value)) {
+    mobileNumber.setCustomValidity('Please enter a valid 10-digit mobile number.');
+
+  } else {
+    mobileNumber.setCustomValidity('');
+  }
+});
+
+
+
+</script>
+</body>
+</html>
+
+
+

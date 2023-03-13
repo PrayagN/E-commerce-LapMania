@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Lap Mania</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/icon-removebg-preview.png" type="image/png"  sizes= '16x16 32x32'  rel='icon'>
+
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+   
+
+    <!-- Google Web Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/website/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/website/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/website/css/style.css" rel="stylesheet">
+    <!--For image zoom-->
+    
+    <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.css" integrity="sha512-HpsrtV14kp6nzTTw7ZDlA8H0go0+duOoAow7oAPhL/JjKAs+G1Iy2w+5E5aIOn8G5vy5JAvQmnhvPI+HJnEkMw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js" integrity="sha512-dRd6f0U9XsUy3Yj7VrWE1nFw7DPrbd1ZzHsmJjKxgLa+c9DBpNfam/8hjJms2QeI7V10mWgzf+PvE5g2XYtG5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  
+
+   
+</head>
+
+<body>
+     <!-- Topbar Start -->
+     <div class="container-fluid">
+        <div class="row bg-secondary py-1 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center h-100">
+                    <!-- <a class="text-body mr-3" href="">About</a>
+                    <a class="text-body mr-3" href="">Contact</a>
+                    <a class="text-body mr-3" href="">Help</a>
+                    <a class="text-body mr-3" href="">FAQs</a> -->
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right f">
+                <div class="d-inline-flex align-items-center">
+                    <div class="btn-group ">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+
+                            <% if(typeof userData !=='undefined'){%>
+                              <a href="/logout">    <button class="dropdown-item"    type="button">Logout</button> </a>
+                                
+                           <% }else{ %>
+                                <button class="dropdown-item" onclick="location.href='/login'" type="button">Log in</button>
+
+                            <%}%>
+
+                           
+                        </div>
+                    </div>
+                    <div class="btn-group mx-2">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">EUR</button>
+                            <button class="dropdown-item" type="button">GBP</button>
+                            <button class="dropdown-item" type="button">CAD</button>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">FR</button>
+                            <button class="dropdown-item" type="button">AR</button>
+                            <button class="dropdown-item" type="button">RU</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-inline-flex align-items-center d-block d-lg-none">
+                    <a href="" class="btn px-0 ml-2">
+                        <i class="fas fa-heart text-dark"></i>
+                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    </a>
+                    <a href="" class="btn px-0 ml-2">
+                        <i class="fas fa-shopping-cart text-dark"></i>
+                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+            <div class="col-lg-4">
+                <a href="/home" class="text-decoration-none border-bottom">
+                    <span class="h1 text-uppercase   px-2" style="color: #2874f0;">LAP</span>
+                    <span class="h1 text-uppercase text-dark  px-2 ml-n1">MANIA</span>
+                </a>
+            </div>
+            <div class="col-lg-4 col-6 text-left">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control"  id="search_input" onkeyup="searchProduct()" placeholder="Search for products">
+                        <div class="input-group-append">
+                            <!-- <button type="submit" class="btn btn-outline-success btn-floating ms-2  " data-mdb-ripple-color="dark">
+                                <i class="bi bi-search"></i>
+                              </button> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4 col-6 text-right">
+                <p class="m-0">Customer Service</p>
+                <h5 class="m-0">+012 345 6789</h5>
+                <h5 class="m-0"></h5>
+            </div>
+        </div>
+    </div>
+    <style>
+        input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+      </style>
+    
+    <!-- Topbar End -->
+
+    
+    <!-- Navbar Start -->
+    
+    <!-- Navbar End -->

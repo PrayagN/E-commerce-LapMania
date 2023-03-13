@@ -1,0 +1,301 @@
+<%- include("../admin/header.ejs") %>
+
+<section id="sidebar">
+    <a href="#" class="brand">
+        <i class='bx bxs-smile'></i>
+        <span class="text">LapMania</span>
+    </a>
+    <ul class="side-menu top">
+        <li >
+            <a href="/admin/home">
+                <i class='bx bxs-dashboard' ></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/customers">
+                <i class='bx bxs-user-account'></i> 
+                <span class="text">Customers</span>
+            </a>
+        </li>
+        <li >
+            <a href="/admin/orders">
+                <i class='bx bxs-shopping-bags' ></i>
+                <span class="text">Orders</span>
+            </a>
+        </li >
+        <li >
+            <a href="/admin/category">
+                <i class='bx bx-category' ></i>
+                <span class="text">Categories</span>
+            </a>
+        </li>
+        <li class="active" >
+            <a href="/admin/Products">
+                <i class='bx bxs-cart-alt' ></i>
+                <span class="text">Products</span>
+            </a>
+        </li>
+        <li >
+            <a href="/admin/banner">
+                <i class='bx bxs-carousel'></i>
+                <span class="text">Banner</span>
+            </a>
+        </li>
+        <li >
+            <a href="/admin/coupon">
+                <i class='bx bxs-coupon'></i>
+                <span class="text">Coupon</span>
+            </a>
+        </li>
+        <li  >
+            <a href="/admin/sales">
+                <i class='bx bx-money' ></i>
+                <span class="text">Sales</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="side-menu">
+        
+        <li >
+            <a href="/admin/logout" class="logout">
+                <i class='bx bxs-log-out-circle' ></i>
+                <span class="text">Logout</span>
+            </a>
+        </li>
+    </ul>
+</section>
+<!-- SIDEBAR -->
+
+
+
+<!-- CONTENT -->
+<section id="content">
+    <!-- NAVBAR -->
+    <nav>
+        <i class='bx bx-menu' style="display: none;" ></i>
+        <a href="#" class="nav-link" style="display: none;">Categories</a>
+        <form action="#">
+            <!-- <div class="form-input" style="display: none;">
+                <input type="search" placeholder="Search...">
+                <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+            </div> -->
+        </form>
+        <input type="checkbox" id="switch-mode" hidden>
+        <label for="switch-mode" class="switch-mode"></label>
+        <a href="#" class="notification">
+            <i class='bx bxs-bell' ></i>
+            <span class="num">8</span>
+        </a>
+        <a href="#" class="profile">
+            <img src="img/people.png">
+        </a>
+    </nav>
+    <!-- NAVBAR -->
+
+    <!-- MAIN -->
+    <main>
+        <div class="head-title">
+            <div class="left">
+                <h1>Products</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="/admin/customers"></a>
+                    </li>
+                    <!-- <li><i class='bx bx-chevron-right' ></i></li> -->
+                    <!-- <li>
+                        <a class="active" href="/admin/customers">Customers</a>
+                    </li> -->
+                </ul>
+            </div>
+            <a href="/admin/addProducts" class="btn-download">
+                <i class='bx bxs-cloud-download' ></i>
+                <span class="text">Add Products</span>
+            </a>
+            
+        </div>
+
+
+        <div class="table-data">
+            <div class="order">
+                <div class="head">
+                    <h3></h3>
+                    <!-- <nav> 
+                        <form action="#">
+                            <div class="form-input">
+                                <input type="search" name="search" placeholder="Search...">
+                                <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+                            </div>
+                        </form>
+                        </nav> -->
+                    
+                </div>
+                
+                
+                <table id="myTable" class="display" >
+                    <!-- id='example' -->
+                    <thead>
+                        <tr>
+                            <th>Sl.No</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Price</th>
+                            <th>Brand</th>
+                            <th>Categories</th>
+                            <th>stock</th>
+                            <th>details</th>
+                            
+                        </tr>
+
+
+                        
+                    </thead>
+
+                    <tbody >
+                        <% 
+                                if(category.length>0){
+                                    for(let i=0; i <product.length ; i++){
+                                        %>
+                                        <tr  >
+                                            <td style="margin-top: 10px;"><%= i+1 %></td>
+                                            <td><span style="display:inline-block;
+                                                white-space: nowrap;
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                max-width: 18ch">   <%= product[i].name %> </span></td>
+                                          <!-- <div class="img-zoom-container">  -->
+                                          <td ><img id="myimage" style="border-radius: 0;" src="/productImages/<%=product[i].image[0]%>"></td>
+                                          <!-- <div id="myresult" class="img-zoom-result"></div> -->
+                                        <!-- </div>   -->
+                                          <td><%= product[i].price %></td>
+                                            <td><%= product[i].brand %></td>
+                                         
+                                             
+                                                <td><%= product[i].category.name %></td>
+                                                
+                                         
+                                           
+                                            <td><%= product[i].stocks %></td>
+                                      <td> <a href="/admin/productdetails?id=<%= product[i]._id %>" class="btn btn-outline-info">Info</a>
+                                            
+                                              <!-- <td> <a href="/admin/viewCustomers?id=<%= product[i]._id %>" class="btn btn-outline-info">Info</a> -->
+                                              </td>
+
+                                        </tr>
+                                        <%
+                                    }
+                                }else{
+
+                                    %>
+                                    <tr> 
+                                    <td colspan = "5">Products Not Found </td>
+                                    </tr>
+                                    <%
+                                }
+                            %>
+                      
+                    </tbody>
+                </table>
+            </div>
+        
+    </main>
+    <!-- MAIN -->
+</section>
+<!-- CONTENT -->
+<style>
+    * {box-sizing: border-box;}
+
+.img-zoom-container {
+  position: relative;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  /*set the size of the lens:*/
+  width: 40px;
+  height: 40px;
+}
+
+.img-zoom-result {
+  border: 1px solid #d4d4d4;
+  /*set the size of the result div:*/
+  width: 300px;
+  height: 300px;
+}
+</style>
+
+<script>
+
+
+
+
+
+
+
+
+
+
+
+    function imageZoom(imgID, resultID) {
+  var img, lens, result, cx, cy;
+  img = document.getElementById(imgID);
+  result = document.getElementById(resultID);
+  /* Create lens: */
+  lens = document.createElement("DIV");
+  lens.setAttribute("class", "img-zoom-lens");
+  /* Insert lens: */
+  img.parentElement.insertBefore(lens, img);
+  /* Calculate the ratio between result DIV and lens: */
+  cx = result.offsetWidth / lens.offsetWidth;
+  cy = result.offsetHeight / lens.offsetHeight;
+  /* Set background properties for the result DIV */
+  result.style.backgroundImage = "url('" + img.src + "')";
+  result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+  /* Execute a function when someone moves the cursor over the image, or the lens: */
+  lens.addEventListener("mousemove", moveLens);
+  img.addEventListener("mousemove", moveLens);
+  /* And also for touch screens: */
+  lens.addEventListener("touchmove", moveLens);
+  img.addEventListener("touchmove", moveLens);
+  function moveLens(e) {
+    var pos, x, y;
+    /* Prevent any other actions that may occur when moving over the image */
+    e.preventDefault();
+    /* Get the cursor's x and y positions: */
+    pos = getCursorPos(e);
+    /* Calculate the position of the lens: */
+    x = pos.x - (lens.offsetWidth / 2);
+    y = pos.y - (lens.offsetHeight / 2);
+    /* Prevent the lens from being positioned outside the image: */
+    if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
+    if (x < 0) {x = 0;}
+    if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
+    if (y < 0) {y = 0;}
+    /* Set the position of the lens: */
+    lens.style.left = x + "px";
+    lens.style.top = y + "px";
+    /* Display what the lens "sees": */
+    result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+  }
+  function getCursorPos(e) {
+    var a, x = 0, y = 0;
+    e = e || window.event;
+    /* Get the x and y positions of the image: */
+    a = img.getBoundingClientRect();
+    /* Calculate the cursor's x and y coordinates, relative to the image: */
+    x = e.pageX - a.left;
+    y = e.pageY - a.top;
+    /* Consider any page scrolling: */
+    x = x - window.pageXOffset;
+    y = y - window.pageYOffset;
+    return {x : x, y : y};
+  }
+}
+
+
+
+
+</script>
+
+<%- include("../admin/footer.ejs")%>

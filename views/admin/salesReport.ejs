@@ -1,0 +1,39 @@
+<table id="myTable" class="display" style="width:100%">
+    <thead>
+        <h4 style="display: inline-block;" class="mx-5">Sales Report from <%=start_date%> to <%=end_date%></h4>
+        <tr> 
+            
+            <th>Sl.No</th>
+            <th>User</th>
+            <th>Date Order</th>
+            <th>Time</th>
+            <th>Products</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody id="table" >
+        <%for(let i=0;i<orderData.length ;i++){%>
+            <tr>
+
+                    <td><%= i+1 %></td>
+                    <td><%= orderData[i].userId.name %></td>
+                    <td><%= orderData[i].date%></td>
+                    <td><%=orderData[i].time%></td>
+                   <td> 
+                    <% for (let j = 0; j < orderData[i].products.length; j++) { %>
+                        <div style=" font-size: medium; width: 500px; color: black; word-wrap: break-word; display: -webkit-box; -webkit-box-orient: vertical; text-overflow: ellipsis; -webkit-line-clamp: 2; overflow: hidden;">
+                            <%= orderData[i].products[j].quantity%> x <%= orderData[i].products[j].productId[0].name%><br><br> </div> 
+                        
+
+                      <% } %>
+                    </td>
+                    <td>&#x20B9;<%=orderData[i].total%></td>
+            </tr>
+           
+
+       <%}%>
+            
+    </tbody>
+</table>
+<h1>overAll :<%=total%></h1>
+
