@@ -311,7 +311,7 @@ const maxR = document.getElementById('maxR');
 const maxP = document.getElementById('maxP');
 
 maxP.addEventListener('input',function(){
-  if(maxP.value <= maxR.value){
+  if(maxP.value >= maxR.value){
     maxP.setCustomValidity('maximum Redeem amount should be lesser than maximum Purchase amount..');
   }else{
     maxP.setCustomValidity('');
