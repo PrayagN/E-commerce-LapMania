@@ -36,7 +36,7 @@ const { response } = require("../routes/userRoute");
 const { log } = require("console");
 
 var instance = new Razorpay({
-  key_id: key_id,
+  key_id:key_id,
   key_secret: key_secret,
 });
 
@@ -895,7 +895,7 @@ const addtoCart = async (req, res, next) => {
             { userId: userData },
             { $push: { products: { ...productData1 } } }
           );
-          res.redirect("/shop");
+          res.redirect("/cart");
         } else {
           const dup = await Cart.findOneAndUpdate(
             { userId: req.session.user_id, "products.productId": id },
