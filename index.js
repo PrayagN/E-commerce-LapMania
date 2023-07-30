@@ -1,48 +1,56 @@
-require('dotenv').config();
-const mongoose =  require("mongoose");
-mongoose.set('strictQuery',false)
-const tippy = require('tippy.js');
+require("dotenv").config();
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+const tippy = require("tippy.js");
 
-mongoose.connect(process.env.MONGODB_IP).then(() => {
-  console.log('database connected');
-}).catch((err) => {
-  console.log(err);
-})
-const path =require('path');
+mongoose
+  .connect(process.env.MONGODB_IP)
+  .then(() => {
+    console.log("database connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+const path = require("path");
 
-const express = require('express');
-const app= express();
-const nocache = require('nocache');
+const express = require("express");
+const app = express();
+const nocache = require("nocache");
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  
+}));
 app.use(nocache());
-app.set('view engine','ejs');
-app.set('views','views');
+app.set("view engine", "ejs");
+app.set("views", "views");
 
 //for user route
-const userRoute = require('./routes/userRoute')
-app.use('/',userRoute)
-app.use(express.static('public'));  
-app.use(express.static('assets1'))
+const userRoute = require("./routes/userRoute");
+app.use("/", userRoute);
+app.use(express.static("public"));
+app.use(express.static("assets1"));
 
 // for admin route
 
-const adminRoute = require('./routes/adminRoute')
-app.use('/admin',adminRoute)
-app.use(express.static('public'));
+const adminRoute = require("./routes/adminRoute");
+app.use("/admin", adminRoute);
+app.use(express.static("public"));
 
 //404
-app.use(function(req, res, next) {
-    res.status(404);
-  
-    // respond with html page
-    if (req.accepts('html')) {
-      res.render('404', { url: req.url });
-      return;
-    }
-  });
-app.use((error, req, res, next) => {
-    res.status(500).render('error');
-  });
+app.use(function (req, res, next) {
+  res.status(404);
 
-app.listen(3000,function(){
-    console.log("Started.....");
-}); 
+  // respond with html page
+  if (req.accepts("html")) {
+    res.render("404", { url: req.url });
+    return;
+  }
+});
+app.use((error, req, res, next) => {
+  res.status(500).render("error");
+});
+
+app.listen(3000, function () {
+  console.log("Started.....");
+});
