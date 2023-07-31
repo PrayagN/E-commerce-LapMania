@@ -3,7 +3,7 @@ const admin_route = express();
 
 const session = require("express-session");
 const config = require('../config/config')
-admin_route.use(session({secret:config.sessionSecret}));
+admin_route.use(session({secret:config.sessionSecret,resave:false,saveUninitialized:true}));
 
 const Product = require('../models/productModel');
 const Order =require('../models/orderModel');

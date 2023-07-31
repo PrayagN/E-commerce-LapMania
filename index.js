@@ -16,11 +16,7 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const nocache = require("nocache");
-app.use(session({
-  resave: false,
-  saveUninitialized: false,
-  
-}));
+
 app.use(nocache());
 app.set("view engine", "ejs");
 app.set("views", "views");
